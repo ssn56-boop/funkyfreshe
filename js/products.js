@@ -1,21 +1,17 @@
 /* ============================================================
-   PRODUCTS — edit this file to manage what's for sale.
-   No coding tools needed, just edit the values below.
+   PRODUCTS — edit this list to add, remove, or update purses.
 
-   Each purse is one { } block. To add a new one, copy a whole
-   block (from { to },) and paste it before the closing ];
-
-   FIELDS
-   - id          unique text, no spaces (e.g. "purse-004")
-   - name        shows as the title on the card and product page
-   - price       a plain number, no $ sign (e.g. 48 or 48.50)
-   - description short description shown on the card and product page
-   - image       path to the main photo, e.g. "images/products/purse-001.jpg"
-                 leave as "" (empty quotes) to show a blank
-                 placeholder square until you have a photo
-   - gallery     EXTRA photos for the product page, as a list, e.g.:
-                 gallery: ["images/products/purse-001-b.jpg", "images/products/purse-001-c.jpg"]
-                 leave as [] if you only have the one main photo
+   Each purse is an object with these fields:
+   - id          a short unique slug, e.g. "purse-001" — used in
+                 the URL for its product page (product.html?id=...)
+   - name        shown as the title everywhere
+   - price       a number, no $ sign (e.g. 65, not "$65")
+   - description a sentence or two shown on the shop grid and
+                 product page
+   - image       the main photo, path relative to this folder's
+                 parent (e.g. "images/products/my-photo.jpg")
+   - gallery     an array of additional photo paths shown as
+                 thumbnails on the product page (can be empty: [])
    - inStock     true  = shows normally with "Add to cart"
                  false = since every purse is one-of-a-kind, this marks it
                          "Sold" on the shop page and sinks it to the bottom
@@ -36,7 +32,7 @@ window.FF_PRODUCTS = [
     id: "purse-001",
     name: "Paisley Tapestry Watch Purse",
     price: 110,
-    description: "Vintage paisley tapestry fabric purse with brown leather. The strap has eight watch faces trimmed with rhinestones.",
+    description: "I made this crossbody from a vintage paisley tapestry fabric with a brown leather trim and top zip closure. The strap is eight vintage watch faces I linked together myself, several trimmed in rhinestones, so the whole thing doubles as a wearable timepiece.",
     image: "images/products/purse-001-paisley-main.jpg",
     gallery: ["images/products/purse-001-paisley-side.jpg", "images/products/purse-001-paisley-worn.jpg"],
     inStock: true,
@@ -158,7 +154,27 @@ window.FF_PRODUCTS = [
     inStock: true,
     squareCheckoutUrl: "https://square.link/u/vBIr7S2g"
   },
+  {
+    id: "purse-013",
+    name: "Pink Glitter Shoulder Bag",
+    price: 90,
+    description: "Pink glitter shoulder bag with a strap of green square and silver rhinestone watch faces.",
+    image: "images/products/purse-013-pink-glitter-stand.jpg",
+    gallery: ["images/products/purse-013-pink-glitter-worn-1.jpg", "images/products/purse-013-pink-glitter-worn-2.jpg"],
+    inStock: true,
+    squareCheckoutUrl: "https://square.link/u/YMAGlLmR"
+  },
+  {
+    id: "purse-014",
+    name: "Black Nine West Hobo Bag",
+    price: 75,
+    description: "Black Nine West hobo bag with a strap of white and red watch faces.",
+    image: "images/products/purse-014-nine-west-stand.jpg",
+    gallery: ["images/products/purse-014-nine-west-worn-1.jpg", "images/products/purse-014-nine-west-worn-2.jpg"],
+    inStock: true,
+    squareCheckoutUrl: "https://square.link/u/EebUek5i"
+  },
   /* Add new purses here as you send me photos — copy the pattern
-     from purse-001 through purse-005 above (id, name, price,
-     description, image, gallery, inStock: true). */
+     above (id, name, price, description, image, gallery,
+     inStock: true, squareCheckoutUrl). */
 ];
