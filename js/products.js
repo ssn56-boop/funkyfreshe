@@ -91,7 +91,7 @@ window.FF_PRODUCTS = [
     description: "Burgundy leather zip pouch with a strap of eight vintage watch faces.",
     image: "images/products/purse-006-burgundy-stand.jpg",
     gallery: ["images/products/purse-006-burgundy-worn-1.jpg", "images/products/purse-006-burgundy-worn-2.jpg", "images/products/purse-006-burgundy-worn-3.jpg"],
-    inStock: true,
+    inStock: false,
     squareCheckoutUrl: "https://square.link/u/afPs3wZ3"
   },
   {
@@ -101,7 +101,7 @@ window.FF_PRODUCTS = [
     description: "Cognac croc-embossed tote with a strap of seven yellow, green rhinestone, and blue watch faces.",
     image: "images/products/purse-007-cognac-croc-stand.jpg",
     gallery: ["images/products/purse-007-cognac-croc-worn-1.jpg", "images/products/purse-007-cognac-croc-worn-2.jpg", "images/products/purse-007-cognac-croc-worn-3.jpg"],
-    inStock: true,
+    inStock: false,
     squareCheckoutUrl: "https://square.link/u/74JXJe7V"
   },
   {
@@ -111,7 +111,7 @@ window.FF_PRODUCTS = [
     description: "Silver metallic croc-embossed bag with a strap of seven black, gray, and silver watch faces.",
     image: "images/products/purse-008-silver-croc-stand.jpg",
     gallery: ["images/products/purse-008-silver-croc-worn-1.jpg", "images/products/purse-008-silver-croc-worn-2.jpg"],
-    inStock: true,
+    inStock: false,
     squareCheckoutUrl: "https://square.link/u/uu6cj4eV"
   },
   {
@@ -161,7 +161,7 @@ window.FF_PRODUCTS = [
     description: "Pink glitter shoulder bag with a strap of green square and silver rhinestone watch faces.",
     image: "images/products/purse-013-pink-glitter-stand.jpg",
     gallery: ["images/products/purse-013-pink-glitter-worn-1.jpg", "images/products/purse-013-pink-glitter-worn-2.jpg"],
-    inStock: true,
+    inStock: false,
     squareCheckoutUrl: "https://square.link/u/YMAGlLmR"
   },
   {
