@@ -28,6 +28,15 @@
    ============================================================ */
 
 window.FF_PRODUCTS = [
+   {
+  id: "shoe-001",
+  name: "Silver Watch Heels",
+  price: 50,
+  description: "Silver pointed-toe heels with a rhinestone-trimmed watch face on each toe. Size 8.",
+  image: "images/products/shoe-001-silver-watch-heels.jpg",
+  gallery: [],
+  inStock: false
+},
   {
     id: "purse-001",
     name: "Paisley Tapestry Watch Purse",
