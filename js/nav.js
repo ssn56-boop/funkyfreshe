@@ -25,3 +25,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+/* ---- Banners tab: adds "Banners" to the menu on every page, and makes
+        the shop page's banner button open in the same tab ---- */
+;(function () {
+  function addBannersTab() {
+    var links = document.querySelector(".nav-links");
+    if (links && !links.querySelector('a[href="banner.html"]')) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = "banner.html";
+      a.textContent = "Banners";
+      if (/banner\.html$/.test(window.location.pathname)) a.className = "active";
+      li.appendChild(a);
+      var customers = links.querySelector('a[href="customers.html"]');
+      if (customers && customers.parentNode.parentNode === links) {
+        links.insertBefore(li, customers.parentNode);
+      } else {
+        links.appendChild(li);
+      }
+    }
+    var btn = document.getElementById("banner-form-link");
+    if (btn) { btn.removeAttribute("target"); btn.removeAttribute("rel"); }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", addBannersTab);
+  } else {
+    addBannersTab();
+  }
+})();
