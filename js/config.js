@@ -23,5 +23,5 @@
 
 window.FF_CONFIG = {
   CONTACT_EMAIL: "ssn56@cornell.edu",
-  CUSTOM_BANNER_FORM_URL: "https://l.instagram.com/?u=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSc-mb5h9KUOGc60zbBMqKslyfhuMbBGh_rwQEqvD4qNu9AZ5Q%2Fviewform%3Fusp%3Dheader%26utm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio&e=AUDhbEtawt3jCnewOmIfxvAiW9sJCBL5QJ6lKVJWCpgZRD_7BDCbGXzfmOG9zUSLBsDjs9Er83P0qc67JDhVwgPN-pgD_NcfK9urh58fwPyTq79D7wQx8LWp0VBuu7HB_YUsNX1vu-YbQ9_FNBqaOHu9Sb1b"
+  CUSTOM_BANNER_FORM_URL: "banner.html"
 };
