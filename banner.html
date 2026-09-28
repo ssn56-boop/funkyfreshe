@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banner Order Form · Funkyfreshe</title>
+<meta name="description" content="Order a custom hand-painted Funkyfreshe banner.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Banner Order Form · Funkyfreshe">
+<meta property="og:description" content="Order a custom hand-painted Funkyfreshe banner.">
+<meta property="og:image" content="https://ssn56-boop.github.io/funkyfreshe/images/og-image.jpg">
+<meta property="og:url" content="https://ssn56-boop.github.io/funkyfreshe/banner.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="css/main.css">
+<style>
+  .banner-wrap{ max-width: 760px; margin: 0 auto; }
+  .banner-card{ background: var(--box-cream); padding: 34px 34px 38px; box-shadow: 0 2px 0 var(--line); }
+  @media (max-width: 480px){ .banner-card{ padding: 24px 20px 28px; } }
+
+  .banner-card h3.step{ font-size: 24px; margin: 34px 0 6px; }
+  .banner-card h3.step:first-of-type{ margin-top: 0; }
+  .step-note{ margin: 0 0 18px; color: var(--ink-soft); font-size: 14.5px; }
+  .divider{ border: 0; border-top: 1px dashed var(--line); margin: 30px 0 0; }
+
+  .example{ margin: 22px 0 30px; text-align: center; }
+  .example img{ margin: 0 auto; max-height: 420px; width: auto; max-width: 100%; object-fit: contain; box-shadow: 0 10px 24px -14px rgba(43,15,26,.4); }
+  .example figcaption{ margin-top: 10px; font-size: 13px; color: var(--ink-soft); }
+
+  .intro p{ margin: 0 0 10px; color: var(--ink-soft); }
+  .intro strong{ color: var(--ink); }
+
+  fieldset{ border: 0; margin: 0 0 18px; padding: 0; min-width: 0; }
+  legend, .group-label{ display: block; padding: 0; font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 8px; }
+  .req{ color: var(--red-soft-deep); }
+
+  .opt-grid{ display: grid; gap: 10px; }
+  .opt{ position: relative; display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1.5px solid var(--line); background: var(--white); cursor: pointer; transition: border-color .15s var(--ease), background .15s var(--ease); }
+  .opt:hover{ border-color: var(--pink); }
+  .opt input{ width: 18px; height: 18px; margin: 0; flex: 0 0 auto; accent-color: var(--ink); }
+  .opt .opt-main{ flex: 1 1 auto; }
+  .opt .opt-title{ display: block; font-weight: 700; color: var(--ink); }
+  .opt .opt-desc{ display: block; font-size: 13.5px; color: var(--ink-soft); }
+  .opt .opt-price{ font-family: var(--font-tag); font-weight: 700; color: var(--ink); white-space: nowrap; }
+  .opt:has(input:checked){ border-color: var(--ink); background: var(--cream); }
+  .opt:has(input:focus-visible){ outline: 3px solid var(--pink-deep); outline-offset: 2px; }
+
+  .pay-box{ margin: 6px 0 22px; padding: 16px 18px; background: var(--white); border: 1.5px dashed var(--line); }
+  .pay-box p{ margin: 0 0 8px; font-size: 14.5px; }
+  .pay-box .pay-amount{ font-family: var(--font-tag); font-weight: 700; }
+  .pay-box a.venmo{ display: inline-block; margin-top: 4px; text-decoration: underline; font-weight: 700; }
+
+  .check{ display: flex; align-items: flex-start; gap: 10px; margin: 0 0 18px; cursor: pointer; font-size: 14.5px; }
+  .check input{ width: 18px; height: 18px; margin: 2px 0 0; flex: 0 0 auto; accent-color: var(--ink); }
+
+  .loc{ margin: 0 0 18px; padding: 12px 14px; background: var(--white); font-size: 14.5px; }
+
+  .hp{ position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .form-error{ margin: 16px 0 0; padding: 12px 14px; background: var(--white); border-left: 4px solid var(--red-soft-deep); font-size: 14.5px; }
+  .form-error[hidden]{ display: none; }
+
+  .thanks{ text-align: center; padding: 20px 6px; }
+  .thanks h2{ font-size: 34px; margin-bottom: 12px; }
+  .thanks p{ margin: 0 auto 12px; max-width: 520px; color: var(--ink-soft); }
+  [hidden]{ display: none !important; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="logo">Funky<em>freshe</em></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="story.html">Our Story</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="customers.html">Customers</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="cart.html" class="cart-link" aria-label="View cart">
+        Cart <span class="cart-badge" data-count="0">0</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero wrap">
+  <div class="text-bubble">
+    <h1>Banner order form</h1>
+    <p>Custom hand-painted banners for birthdays, showers, and every occasion in between.</p>
+  </div>
+</header>
+
+<section class="wrap" style="padding-bottom:100px;">
+  <div class="banner-wrap">
+
+    <div class="banner-card" id="form-card">
+
+      <div class="intro">
+        <p><strong>Hiiii!</strong> Please fill this out at least <strong>2 weeks in advance</strong> if you would like a banner.</p>
+        <p>All banners are <strong>35 in by 4 ft</strong>. If you would like more than one, please submit one form per banner.</p>
+        <p>Want poster inspo? Follow me on <a href="https://www.instagram.com/funkyfreshe/" target="_blank" rel="noopener" style="text-decoration:underline;">Instagram @funkyfreshe</a>.</p>
+      </div>
+
+      <figure class="example">
+        <img src="images/timeline/tl-march2026-banner-sale.jpg" alt="Example banner: a hand-painted Happy Saint Patrick's Day banner">
+        <figcaption>Example banner</figcaption>
+      </figure>
+
+      <form id="banner-form" novalidate>
+        <!-- spam trap: real people never see or fill this in -->
+        <div class="hp" aria-hidden="true">
+          <label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <input type="hidden" name="banner_price" id="banner_price" value="">
+
+        <h3 class="step">Your info</h3>
+        <div class="field">
+          <label for="name">Name <span class="req">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="phone">Phone number <span class="req">*</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="field">
+            <label for="email">Email <span class="req">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+        </div>
+
+        <h3 class="step">Your banner</h3>
+        <fieldset>
+          <legend>What kind of banner would you like? <span class="req">*</span></legend>
+          <div class="opt-grid">
+            <label class="opt">
+              <input type="radio" name="banner_type" value="BW Banner ($40)" data-price="40" required>
+              <span class="opt-main"><span class="opt-title">BW Banner</span><span class="opt-desc">Black and white only</span></span>
+              <span class="opt-price">$40</span>
+            </label>
+            <label class="opt">
+              <input type="radio" name="banner_type" value="Standard Banner ($45)" data-price="45">
+              <span class="opt-main"><span class="opt-title">Standard Banner</span><span class="opt-desc">Up to three colors</span></span>
+              <span class="opt-price">$45</span>
+            </label>
+            <label class="opt">
+              <input type="radio" name="banner_type" value="Advanced Banner ($50)" data-price="50">
+              <span class="opt-main"><span class="opt-title">Advanced Banner</span><span class="opt-desc">More than three colors</span></span>
+              <span class="opt-price">$50</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="pay-box" id="pay-box">
+          <p id="pay-prompt">Pick a banner type above and I'll show you what to send.</p>
+          <p id="pay-details" hidden>Please Venmo <span class="pay-amount" id="pay-amount"></span> to <strong>@sammie-neeb</strong> before you submit.<br>
+            <a class="venmo" id="venmo-link" href="https://venmo.com/u/sammie-neeb" target="_blank" rel="noopener">Open Venmo &rarr;</a>
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="venmo_name">Venmo username you paid from <span class="req">*</span></label>
+          <input id="venmo_name" name="venmo_username" type="text" placeholder="@yourname" required>
+        </div>
+        <label class="check">
+          <input type="checkbox" name="payment_sent" id="payment_sent" required>
+          <span>I've sent the Venmo payment shown above. <span class="req">*</span></span>
+        </label>
+
+        <fieldset>
+          <legend>Ship or pick up? <span class="req">*</span></legend>
+          <div class="opt-grid">
+            <label class="opt">
+              <input type="radio" name="fulfillment" value="Pick up" required>
+              <span class="opt-main"><span class="opt-title">Pick up</span></span>
+            </label>
+            <label class="opt">
+              <input type="radio" name="fulfillment" value="Ship">
+              <span class="opt-main"><span class="opt-title">Ship</span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="occasion">What is this for? Please list as many details as possible. <span class="req">*</span></label>
+          <textarea id="occasion" name="occasion" rows="4" required></textarea>
+        </div>
+        <div class="field">
+          <label for="ideas">Do you have any ideas of what you would like it to look like? <span class="req">*</span></label>
+          <textarea id="ideas" name="design_ideas" rows="4" required></textarea>
+        </div>
+        <div class="field">
+          <label for="extra">Anything else I should know?</label>
+          <textarea id="extra" name="anything_else" rows="3"></textarea>
+        </div>
+
+        <!-- Pick up -->
+        <div id="pickup-section" hidden>
+          <hr class="divider">
+          <h3 class="step">Pick up details</h3>
+          <p class="loc"><strong>Location:</strong> 315 Thurston Ave</p>
+          <div class="field-row">
+            <div class="field">
+              <label for="pickup_day">What day can you pick up? <span class="req">*</span></label>
+              <input id="pickup_day" name="pickup_day" type="date" disabled>
+            </div>
+            <div class="field">
+              <label for="pickup_time">What time that day? <span class="req">*</span></label>
+              <input id="pickup_time" name="pickup_time" type="time" disabled>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shipping -->
+        <div id="ship-section" hidden>
+          <hr class="divider">
+          <h3 class="step">Shipping details</h3>
+          <div class="field">
+            <label for="ship_address">Shipping address <span class="req">*</span></label>
+            <textarea id="ship_address" name="shipping_address" rows="3" autocomplete="street-address" disabled></textarea>
+          </div>
+          <div class="field">
+            <label for="ship_by">When do you need this to arrive? <span class="req">*</span></label>
+            <input id="ship_by" name="arrive_by" type="date" disabled>
+          </div>
+          <div class="field">
+            <label for="ship_notes">Shipping notes (optional)</label>
+            <textarea id="ship_notes" name="shipping_notes" rows="2" disabled></textarea>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="ship_ack" name="shipping_timing_acknowledged" disabled>
+            <span>I understand that if I do not order at least a week and a half in advance for the "shipping" choice, I may not get it. <span class="req">*</span></span>
+          </label>
+        </div>
+
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+
+        <button type="submit" class="btn btn-primary btn-block" id="submit-btn" style="margin-top:22px;">Send my banner request</button>
+      </form>
+    </div>
+
+    <div class="banner-card thanks" id="thanks" hidden>
+      <h2>Thank you!</h2>
+      <p>Your banner request is in. I'll read through the details and follow up with you by email or phone soon.</p>
+      <p>If anything changes, or you want to send inspo, message me on <a href="https://www.instagram.com/funkyfreshe/" target="_blank" rel="noopener" style="text-decoration:underline;">Instagram @funkyfreshe</a>.</p>
+      <a href="index.html" class="btn btn-primary" style="margin-top:14px;">Back to home</a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    Funkyfreshe &middot; Handmade earrings &amp; watch purses, made in New York since 2021.
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/nav.js"></script>
+<script>
+(function () {
+  // Where submissions go. FormSubmit emails them to you. After you activate it
+  // (see setup notes), FormSubmit gives you a private random-string address you
+  // can paste in place of the email below so your email isn't in the page source.
+  var FORM_ENDPOINT = "https://formsubmit.co/ajax/ssn56@cornell.edu";
+
+  var form = document.getElementById("banner-form");
+  var errorBox = document.getElementById("form-error");
+  var submitBtn = document.getElementById("submit-btn");
+
+  // ---------- price + Venmo prompt ----------
+  var payPrompt = document.getElementById("pay-prompt");
+  var payDetails = document.getElementById("pay-details");
+  var payAmount = document.getElementById("pay-amount");
+  var venmoLink = document.getElementById("venmo-link");
+  var priceField = document.getElementById("banner_price");
+
+  form.querySelectorAll('input[name="banner_type"]').forEach(function (radio) {
+    radio.addEventListener("change", function () {
+      var price = radio.getAttribute("data-price");
+      payPrompt.hidden = true;
+      payDetails.hidden = false;
+      payAmount.textContent = "$" + price;
+      priceField.value = "$" + price;
+      venmoLink.href = "https://venmo.com/u/sammie-neeb?txn=pay&amount=" + price +
+        "&note=" + encodeURIComponent("Funkyfreshe banner");
+    });
+  });
+
+  // ---------- pick up vs ship ----------
+  var pickupSection = document.getElementById("pickup-section");
+  var shipSection = document.getElementById("ship-section");
+
+  function setSection(section, on) {
+    section.hidden = !on;
+    section.querySelectorAll("input, textarea").forEach(function (el) {
+      el.disabled = !on;
+      // optional shipping notes stay optional
+      if (el.id === "ship_notes") return;
+      el.required = on;
+    });
+  }
+
+  form.querySelectorAll('input[name="fulfillment"]').forEach(function (radio) {
+    radio.addEventListener("change", function () {
+      setSection(pickupSection, radio.value === "Pick up");
+      setSection(shipSection, radio.value === "Ship");
+    });
+  });
+
+  // dates can't be in the past
+  var today = new Date();
+  var iso = today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
+  document.getElementById("pickup_day").min = iso;
+  document.getElementById("ship_by").min = iso;
+
+  // ---------- submit ----------
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.hidden = false;
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    errorBox.hidden = true;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    var data = new FormData(form);
+    var payload = {};
+    data.forEach(function (value, key) {
+      if (key === "payment_sent" || key === "shipping_timing_acknowledged") {
+        payload[key] = "Yes";
+      } else {
+        payload[key] = value;
+      }
+    });
+
+    payload._subject = "New banner order: " + (payload.name || "") + " (" + (payload.banner_type || "") + ")";
+    payload._template = "table";
+    payload._captcha = "false";
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending…";
+
+    fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (body) {
+          if (!res.ok || body.success === "false" || body.success === false) {
+            throw new Error(body.message || "Request failed");
+          }
+        });
+      })
+      .then(function () {
+        document.getElementById("form-card").hidden = true;
+        document.getElementById("thanks").hidden = false;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send my banner request";
+        showError("Something went wrong sending your request, so it did not go through. Please try again, or message me on Instagram @funkyfreshe.");
+      });
+  });
+})();
+</script>
+</body>
+</html>
