@@ -44,5 +44,13 @@ window.FF_CUSTOMERS = [
   {
     image: "images/customers/customer-08-saks-and-the-city.jpg",
     caption: "A Saks and the City themed party banner."
+  },
+  {
+    image: "images/customers/customer-10-vineyard-friends.jpg",
+    caption: "Two friends out at the vineyard, watch purses in hand."
+  },
+  {
+    image: "images/customers/customer-11-minecraft-birthday.jpg",
+    caption: "A hand-painted Minecraft birthday banner."
   }
 ];
