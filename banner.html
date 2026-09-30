@@ -58,6 +58,25 @@
   .form-error{ margin: 16px 0 0; padding: 12px 14px; background: var(--white); border-left: 4px solid var(--red-soft-deep); font-size: 14.5px; }
   .form-error[hidden]{ display: none; }
 
+  .field-help{ margin: 6px 0 0; font-size: 12.5px; color: var(--ink-soft); }
+  .file-drop{
+    display: block; text-align: center; cursor: pointer;
+    padding: 22px 16px; border: 2px dashed var(--line);
+    background: var(--white); font-size: 14px; color: var(--ink-soft);
+    transition: border-color .15s var(--ease), background .15s var(--ease);
+  }
+  .file-drop:hover, .file-drop.is-dragover{ border-color: var(--pink); background: var(--cream); }
+  .file-thumbs{ display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .visually-hidden-file{ position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .file-thumb{ position: relative; width: 84px; height: 84px; background: var(--white); overflow: hidden; }
+  .file-thumb img{ width: 100%; height: 100%; object-fit: cover; }
+  .file-thumb .remove-thumb{
+    position: absolute; top: 2px; right: 2px; width: 22px; height: 22px;
+    border: none; border-radius: 50%; background: rgba(43,15,26,.72); color: var(--white);
+    font-size: 15px; line-height: 1; padding: 0;
+  }
+  .file-thumb .remove-thumb:hover{ background: var(--red-deep); }
+
   .thanks{ text-align: center; padding: 20px 6px; }
   .thanks h2{ font-size: 34px; margin-bottom: 12px; }
   .thanks p{ margin: 0 auto 12px; max-width: 520px; color: var(--ink-soft); }
@@ -102,7 +121,7 @@
 
       <div class="intro">
         <p><strong>Hiiii!</strong> Please fill this out at least <strong>2 weeks in advance</strong> if you would like a banner.</p>
-        <p>All banners are <strong>25 in by 4 ft</strong>. If you would like more than one, please submit one form per banner.</p>
+        <p>All banners are <strong>35&quot; x 4'</strong>. If you would like more than one, please submit one form per banner.</p>
         <p>Want poster inspo? Follow me on <a href="https://www.instagram.com/funkyfreshe/" target="_blank" rel="noopener" style="text-decoration:underline;">Instagram @funkyfreshe</a>.</p>
       </div>
 
@@ -111,7 +130,12 @@
         <figcaption>Example banner</figcaption>
       </figure>
 
-      <form id="banner-form" novalidate>
+      <form id="banner-form" method="POST" enctype="multipart/form-data"
+            action="https://formsubmit.co/ssn56@cornell.edu">
+        <input type="hidden" name="_subject" value="New Funkyfreshe banner order">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://ssn56-boop.github.io/funkyfreshe/banner.html?sent=1">
         <!-- spam trap: real people never see or fill this in -->
         <div class="hp" aria-hidden="true">
           <label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
@@ -135,6 +159,7 @@
         </div>
 
         <h3 class="step">Your banner</h3>
+        <p class="step-note">Every banner is <strong>35&quot; x 4'</strong>.</p>
         <fieldset>
           <legend>What kind of banner would you like? <span class="req">*</span></legend>
           <div class="opt-grid">
@@ -168,7 +193,7 @@
           <input id="venmo_name" name="venmo_username" type="text" placeholder="@yourname" required>
         </div>
         <label class="check">
-          <input type="checkbox" name="payment_sent" id="payment_sent" required>
+          <input type="checkbox" name="payment_sent" id="payment_sent" value="Yes" required>
           <span>I've sent the Venmo payment shown above. <span class="req">*</span></span>
         </label>
 
@@ -193,6 +218,17 @@
         <div class="field">
           <label for="ideas">Do you have any ideas of what you would like it to look like? <span class="req">*</span></label>
           <textarea id="ideas" name="design_ideas" rows="4" required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="inspo_photos">Inspiration photos (optional)</label>
+          <label class="file-drop" for="inspo_photos" id="file-drop">
+            <span id="file-drop-text">Tap to choose photos of what you'd like it to look like &mdash; up to 10MB total.</span>
+          </label>
+          <input type="file" id="inspo_photos" name="attachment1" accept="image/*" multiple class="visually-hidden-file" aria-describedby="file-help">
+          <p class="field-help" id="file-help">JPG, PNG, or HEIC. 10MB total across all photos.</p>
+          <div class="file-thumbs" id="file-thumbs" hidden></div>
+          <p class="form-error" id="file-error" hidden></p>
         </div>
         <div class="field">
           <label for="extra">Anything else I should know?</label>
@@ -233,8 +269,8 @@
             <textarea id="ship_notes" name="shipping_notes" rows="2" disabled></textarea>
           </div>
           <label class="check">
-            <input type="checkbox" id="ship_ack" name="shipping_timing_acknowledged" disabled>
-            <span>I understand that if I do not order at least a week and a half in advance for the "shipping" choice, I may not get it in time. <span class="req">*</span></span>
+            <input type="checkbox" id="ship_ack" name="shipping_timing_acknowledged" value="Yes" disabled>
+            <span>I understand that if I do not order at least a week and a half in advance for the "shipping" choice, I may not get it. <span class="req">*</span></span>
           </label>
         </div>
 
@@ -266,14 +302,19 @@
 <script src="js/nav.js"></script>
 <script>
 (function () {
-  // Where submissions go. FormSubmit emails them to you. After you activate it
-  // (see setup notes), FormSubmit gives you a private random-string address you
-  // can paste in place of the email below so your email isn't in the page source.
-  var FORM_ENDPOINT = "https://formsubmit.co/ajax/ssn56@cornell.edu";
-
   var form = document.getElementById("banner-form");
   var errorBox = document.getElementById("form-error");
   var submitBtn = document.getElementById("submit-btn");
+
+  // FormSubmit redirects back here with ?sent=1 once it has actually
+  // received and forwarded a submission, files included. Showing the
+  // thank-you card off that query param (rather than a fetch response)
+  // is what makes real file attachments possible: file bytes can only
+  // travel in a genuine multipart form submission, not a JSON fetch body.
+  if (new URLSearchParams(window.location.search).get("sent") === "1") {
+    document.getElementById("form-card").hidden = true;
+    document.getElementById("thanks").hidden = false;
+  }
 
   // ---------- price + Venmo prompt ----------
   var payPrompt = document.getElementById("pay-prompt");
@@ -323,60 +364,130 @@
   document.getElementById("pickup_day").min = iso;
   document.getElementById("ship_by").min = iso;
 
+  // ---------- inspiration photos ----------
+  var fileInput = document.getElementById("inspo_photos");
+  var fileThumbs = document.getElementById("file-thumbs");
+  var fileError = document.getElementById("file-error");
+  var fileDropText = document.getElementById("file-drop-text");
+  var fileDropLabel = document.getElementById("file-drop");
+  var MAX_BYTES = 10 * 1024 * 1024;
+  var selectedFiles = []; // real File objects the input holds
+
+  function totalBytes(list) {
+    return list.reduce(function (sum, f) { return sum + f.size; }, 0);
+  }
+
+  function bytesToMB(n) { return (n / (1024 * 1024)).toFixed(1); }
+
+  function syncInputFiles() {
+    var dt = new DataTransfer();
+    selectedFiles.forEach(function (f) { dt.items.add(f); });
+    fileInput.files = dt.files;
+  }
+
+  function renderThumbs() {
+    fileThumbs.innerHTML = "";
+    fileThumbs.hidden = selectedFiles.length === 0;
+    selectedFiles.forEach(function (file, i) {
+      var wrap = document.createElement("div");
+      wrap.className = "file-thumb";
+      var img = document.createElement("img");
+      img.src = URL.createObjectURL(file);
+      img.alt = file.name;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "remove-thumb";
+      btn.setAttribute("aria-label", "Remove " + file.name);
+      btn.textContent = "\u00D7";
+      btn.addEventListener("click", function () {
+        selectedFiles.splice(i, 1);
+        syncInputFiles();
+        renderThumbs();
+      });
+      wrap.appendChild(img);
+      wrap.appendChild(btn);
+      fileThumbs.appendChild(wrap);
+    });
+    fileDropText.textContent = selectedFiles.length === 0
+      ? "Tap to choose photos of what you\'d like it to look like \u2014 up to 10MB total."
+      : selectedFiles.length + " photo" + (selectedFiles.length === 1 ? "" : "s") + " selected (" +
+        bytesToMB(totalBytes(selectedFiles)) + "MB of 10MB) \u2014 tap to add more.";
+  }
+
+  function addFiles(newFiles) {
+    fileError.hidden = true;
+    var incoming = Array.prototype.slice.call(newFiles).filter(function (f) {
+      return f.type.indexOf("image/") === 0;
+    });
+    var merged = selectedFiles.concat(incoming);
+    if (totalBytes(merged) > MAX_BYTES) {
+      fileError.textContent = "Those photos add up to more than 10MB total, so they weren\'t added. Try fewer or smaller photos.";
+      fileError.hidden = false;
+      syncInputFiles(); // the browser may already be holding the rejected files in
+      return;           // the native input (e.g. from a drag-drop); reset it to what we actually kept
+    }
+    selectedFiles = merged;
+    syncInputFiles();
+    renderThumbs();
+  }
+
+  fileInput.addEventListener("change", function () {
+    addFiles(fileInput.files);
+  });
+  fileDropLabel.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    fileDropLabel.classList.add("is-dragover");
+  });
+  fileDropLabel.addEventListener("dragleave", function () {
+    fileDropLabel.classList.remove("is-dragover");
+  });
+  fileDropLabel.addEventListener("drop", function (e) {
+    e.preventDefault();
+    fileDropLabel.classList.remove("is-dragover");
+    if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+  });
+
   // ---------- submit ----------
-  function showError(msg) {
+  function showError(msg, detail) {
     errorBox.textContent = msg;
+    if (detail) {
+      var small = document.createElement("small");
+      small.style.display = "block";
+      small.style.marginTop = "8px";
+      small.style.opacity = ".8";
+      small.textContent = "Details: " + detail;
+      errorBox.appendChild(small);
+    }
     errorBox.hidden = false;
   }
 
   form.addEventListener("submit", function (e) {
-    e.preventDefault();
     errorBox.hidden = true;
 
     if (!form.checkValidity()) {
+      e.preventDefault();
       form.reportValidity();
       return;
     }
 
-    var data = new FormData(form);
-    var payload = {};
-    data.forEach(function (value, key) {
-      if (key === "payment_sent" || key === "shipping_timing_acknowledged") {
-        payload[key] = "Yes";
-      } else {
-        payload[key] = value;
-      }
-    });
+    if (window.location.protocol === "file:") {
+      e.preventDefault();
+      showError("This form can only send from the live website. It doesn't work when the page is opened as a file on your computer.");
+      return;
+    }
 
-    payload._subject = "New banner order: " + (payload.name || "") + " (" + (payload.banner_type || "") + ")";
-    payload._template = "table";
-    payload._captcha = "false";
+    // Fill in a subject line built from what was actually entered, then
+    // let the browser submit for real — a genuine multipart POST, which
+    // is what actually carries the inspiration photos to your inbox.
+    var bannerType = (form.querySelector('input[name="banner_type"]:checked') || {}).value || "";
+    var name = form.querySelector("#name").value || "";
+    form.querySelector('input[name="_subject"]').value = "New banner order: " + name + (bannerType ? " (" + bannerType + ")" : "");
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending…";
-
-    fetch(FORM_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(payload)
-    })
-      .then(function (res) {
-        return res.json().catch(function () { return {}; }).then(function (body) {
-          if (!res.ok || body.success === "false" || body.success === false) {
-            throw new Error(body.message || "Request failed");
-          }
-        });
-      })
-      .then(function () {
-        document.getElementById("form-card").hidden = true;
-        document.getElementById("thanks").hidden = false;
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      })
-      .catch(function () {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Send my banner request";
-        showError("Something went wrong sending your request, so it did not go through. Please try again, or message me on Instagram @funkyfreshe.");
-      });
+    // if FormSubmit itself rejects the request, the browser will land on
+    // FormSubmit's own error page rather than back here — there is no
+    // further JS to run once the real submission is underway.
   });
 })();
 </script>
