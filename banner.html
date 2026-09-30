@@ -59,23 +59,6 @@
   .form-error[hidden]{ display: none; }
 
   .field-help{ margin: 6px 0 0; font-size: 12.5px; color: var(--ink-soft); }
-  .file-drop{
-    display: block; text-align: center; cursor: pointer;
-    padding: 22px 16px; border: 2px dashed var(--line);
-    background: var(--white); font-size: 14px; color: var(--ink-soft);
-    transition: border-color .15s var(--ease), background .15s var(--ease);
-  }
-  .file-drop:hover, .file-drop.is-dragover{ border-color: var(--pink); background: var(--cream); }
-  .file-thumbs{ display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-  .visually-hidden-file{ position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .file-thumb{ position: relative; width: 84px; height: 84px; background: var(--white); overflow: hidden; }
-  .file-thumb img{ width: 100%; height: 100%; object-fit: cover; }
-  .file-thumb .remove-thumb{
-    position: absolute; top: 2px; right: 2px; width: 22px; height: 22px;
-    border: none; border-radius: 50%; background: rgba(43,15,26,.72); color: var(--white);
-    font-size: 15px; line-height: 1; padding: 0;
-  }
-  .file-thumb .remove-thumb:hover{ background: var(--red-deep); }
 
   .thanks{ text-align: center; padding: 20px 6px; }
   .thanks h2{ font-size: 34px; margin-bottom: 12px; }
@@ -213,18 +196,9 @@
         <div class="field">
           <label for="ideas">Do you have any ideas of what you would like it to look like? <span class="req">*</span></label>
           <textarea id="ideas" name="design_ideas" rows="4" required></textarea>
+          <p class="field-help">Have inspiration photos? This form can't take file attachments &mdash; please DM them to <a href="https://www.instagram.com/funkyfreshe/" target="_blank" rel="noopener" style="text-decoration:underline;">Instagram @funkyfreshe</a> instead.</p>
         </div>
 
-        <div class="field">
-          <label for="inspo_photos">Inspiration photos (optional)</label>
-          <label class="file-drop" for="inspo_photos" id="file-drop">
-            <span id="file-drop-text">Tap to choose photos of what you'd like it to look like &mdash; up to 10MB total.</span>
-          </label>
-          <input type="file" id="inspo_photos" name="attachment1" accept="image/*" multiple class="visually-hidden-file" aria-describedby="file-help">
-          <p class="field-help" id="file-help">JPG, PNG, or HEIC. 10MB total across all photos.</p>
-          <div class="file-thumbs" id="file-thumbs" hidden></div>
-          <p class="form-error" id="file-error" hidden></p>
-        </div>
         <div class="field">
           <label for="extra">Anything else I should know?</label>
           <textarea id="extra" name="anything_else" rows="3"></textarea>
@@ -353,89 +327,6 @@
   document.getElementById("pickup_day").min = iso;
   document.getElementById("ship_by").min = iso;
 
-  // ---------- inspiration photos ----------
-  var fileInput = document.getElementById("inspo_photos");
-  var fileThumbs = document.getElementById("file-thumbs");
-  var fileError = document.getElementById("file-error");
-  var fileDropText = document.getElementById("file-drop-text");
-  var fileDropLabel = document.getElementById("file-drop");
-  var MAX_BYTES = 10 * 1024 * 1024;
-  var selectedFiles = []; // real File objects the input holds
-
-  function totalBytes(list) {
-    return list.reduce(function (sum, f) { return sum + f.size; }, 0);
-  }
-
-  function bytesToMB(n) { return (n / (1024 * 1024)).toFixed(1); }
-
-  function syncInputFiles() {
-    var dt = new DataTransfer();
-    selectedFiles.forEach(function (f) { dt.items.add(f); });
-    fileInput.files = dt.files;
-  }
-
-  function renderThumbs() {
-    fileThumbs.innerHTML = "";
-    fileThumbs.hidden = selectedFiles.length === 0;
-    selectedFiles.forEach(function (file, i) {
-      var wrap = document.createElement("div");
-      wrap.className = "file-thumb";
-      var img = document.createElement("img");
-      img.src = URL.createObjectURL(file);
-      img.alt = file.name;
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "remove-thumb";
-      btn.setAttribute("aria-label", "Remove " + file.name);
-      btn.textContent = "\u00D7";
-      btn.addEventListener("click", function () {
-        selectedFiles.splice(i, 1);
-        syncInputFiles();
-        renderThumbs();
-      });
-      wrap.appendChild(img);
-      wrap.appendChild(btn);
-      fileThumbs.appendChild(wrap);
-    });
-    fileDropText.textContent = selectedFiles.length === 0
-      ? "Tap to choose photos of what you\'d like it to look like \u2014 up to 10MB total."
-      : selectedFiles.length + " photo" + (selectedFiles.length === 1 ? "" : "s") + " selected (" +
-        bytesToMB(totalBytes(selectedFiles)) + "MB of 10MB) \u2014 tap to add more.";
-  }
-
-  function addFiles(newFiles) {
-    fileError.hidden = true;
-    var incoming = Array.prototype.slice.call(newFiles).filter(function (f) {
-      return f.type.indexOf("image/") === 0;
-    });
-    var merged = selectedFiles.concat(incoming);
-    if (totalBytes(merged) > MAX_BYTES) {
-      fileError.textContent = "Those photos add up to more than 10MB total, so they weren\'t added. Try fewer or smaller photos.";
-      fileError.hidden = false;
-      syncInputFiles(); // the browser may already be holding the rejected files in
-      return;           // the native input (e.g. from a drag-drop); reset it to what we actually kept
-    }
-    selectedFiles = merged;
-    syncInputFiles();
-    renderThumbs();
-  }
-
-  fileInput.addEventListener("change", function () {
-    addFiles(fileInput.files);
-  });
-  fileDropLabel.addEventListener("dragover", function (e) {
-    e.preventDefault();
-    fileDropLabel.classList.add("is-dragover");
-  });
-  fileDropLabel.addEventListener("dragleave", function () {
-    fileDropLabel.classList.remove("is-dragover");
-  });
-  fileDropLabel.addEventListener("drop", function (e) {
-    e.preventDefault();
-    fileDropLabel.classList.remove("is-dragover");
-    if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
-  });
-
   // ---------- submit ----------
   function showError(msg, detail) {
     errorBox.textContent = msg;
@@ -464,9 +355,8 @@
       return;
     }
 
-    // FormData carries the inspiration photos alongside the regular fields
-    // as one request, sent in the background — the page never navigates
-    // away, so there's nothing to hang.
+    // FormData carries every field as one request, sent in the
+    // background — the page never navigates away, so nothing can hang.
     var formData = new FormData(form);
     var bannerType = formData.get("banner_type") || "";
     var name = formData.get("name") || "";
