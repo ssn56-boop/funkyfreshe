@@ -28,15 +28,6 @@
    ============================================================ */
 
 window.FF_PRODUCTS = [
-   {
-  id: "shoe-001",
-  name: "Silver Watch Heels",
-  price: 50,
-  description: "Silver pointed-toe heels with a rhinestone-trimmed watch face on each toe. Size 8.",
-  image: "images/products/shoe-001-silver-watch-heels.jpg",
-  gallery: [],
-  inStock: false
-},
   {
     id: "purse-001",
     name: "Paisley Tapestry Watch Purse",
@@ -100,8 +91,7 @@ window.FF_PRODUCTS = [
     description: "Burgundy leather zip pouch with a strap of eight vintage watch faces.",
     image: "images/products/purse-006-burgundy-stand.jpg",
     gallery: ["images/products/purse-006-burgundy-worn-1.jpg", "images/products/purse-006-burgundy-worn-2.jpg", "images/products/purse-006-burgundy-worn-3.jpg"],
-    inStock: false,
-    squareCheckoutUrl: "https://square.link/u/afPs3wZ3"
+    inStock: false
   },
   {
     id: "purse-007",
@@ -110,8 +100,7 @@ window.FF_PRODUCTS = [
     description: "Cognac croc-embossed tote with a strap of seven yellow, green rhinestone, and blue watch faces.",
     image: "images/products/purse-007-cognac-croc-stand.jpg",
     gallery: ["images/products/purse-007-cognac-croc-worn-1.jpg", "images/products/purse-007-cognac-croc-worn-2.jpg", "images/products/purse-007-cognac-croc-worn-3.jpg"],
-    inStock: false,
-    squareCheckoutUrl: "https://square.link/u/74JXJe7V"
+    inStock: false
   },
   {
     id: "purse-008",
@@ -120,8 +109,7 @@ window.FF_PRODUCTS = [
     description: "Silver metallic croc-embossed bag with a strap of seven black, gray, and silver watch faces.",
     image: "images/products/purse-008-silver-croc-stand.jpg",
     gallery: ["images/products/purse-008-silver-croc-worn-1.jpg", "images/products/purse-008-silver-croc-worn-2.jpg"],
-    inStock: false,
-    squareCheckoutUrl: "https://square.link/u/uu6cj4eV"
+    inStock: false
   },
   {
     id: "purse-009",
@@ -170,8 +158,7 @@ window.FF_PRODUCTS = [
     description: "Pink glitter shoulder bag with a strap of green square and silver rhinestone watch faces.",
     image: "images/products/purse-013-pink-glitter-stand.jpg",
     gallery: ["images/products/purse-013-pink-glitter-worn-1.jpg", "images/products/purse-013-pink-glitter-worn-2.jpg"],
-    inStock: false,
-    squareCheckoutUrl: "https://square.link/u/YMAGlLmR"
+    inStock: false
   },
   {
     id: "purse-014",
@@ -182,6 +169,16 @@ window.FF_PRODUCTS = [
     gallery: ["images/products/purse-014-nine-west-worn-1.jpg", "images/products/purse-014-nine-west-worn-2.jpg"],
     inStock: true,
     squareCheckoutUrl: "https://square.link/u/EebUek5i"
+  },
+  {
+    id: "purse-015",
+    name: "Sequin Party Purse",
+    price: 70,
+    description: "Fully sequined party purse in a mix of jewel tones, finished with a strap of seven watch faces. Only one of these — once it's gone, it's gone.",
+    image: "images/products/purse-015-sequin-stand.jpg",
+    gallery: ["images/products/purse-015-sequin-worn.jpg"],
+    inStock: true,
+    squareCheckoutUrl: "https://square.link/u/IZcBPzuZ"
   },
   /* Add new purses here as you send me photos — copy the pattern
      above (id, name, price, description, image, gallery,
