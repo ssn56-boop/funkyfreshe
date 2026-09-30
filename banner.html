@@ -121,7 +121,7 @@
 
       <div class="intro">
         <p><strong>Hiiii!</strong> Please fill this out at least <strong>2 weeks in advance</strong> if you would like a banner.</p>
-        <p>All banners are <strong>25&quot; x 4'</strong>. If you would like more than one, please submit one form per banner.</p>
+        <p>All banners are <strong>35&quot; x 4'</strong>. If you would like more than one, please submit one form per banner.</p>
         <p>Want poster inspo? Follow me on <a href="https://www.instagram.com/funkyfreshe/" target="_blank" rel="noopener" style="text-decoration:underline;">Instagram @funkyfreshe</a>.</p>
       </div>
 
@@ -133,7 +133,7 @@
       <form id="banner-form" novalidate>
         <!-- spam trap: real people never see or fill this in -->
         <div class="hp" aria-hidden="true">
-          <label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+          <label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
         </div>
         <input type="hidden" name="banner_price" id="banner_price" value="">
 
@@ -154,7 +154,7 @@
         </div>
 
         <h3 class="step">Your banner</h3>
-        <p class="step-note">Every banner is <strong>25&quot; x 4'</strong>.</p>
+        <p class="step-note">Every banner is <strong>35&quot; x 4'</strong>.</p>
         <fieldset>
           <legend>What kind of banner would you like? <span class="req">*</span></legend>
           <div class="opt-grid">
@@ -297,11 +297,9 @@
 <script src="js/nav.js"></script>
 <script>
 (function () {
-  // Submissions go to FormSubmit's AJAX endpoint. It emails you each one.
-  // The first submission to a brand-new address isn't delivered until you
-  // click the activation link FormSubmit emails you (check spam) — every
-  // submission after that arrives normally.
-  var FORM_ENDPOINT = "https://formsubmit.co/ajax/ssn56@cornell.edu";
+  // Submissions go to your Formspree form. It emails you each one, files
+  // included — no activation step needed like FormSubmit required.
+  var FORM_ENDPOINT = "https://formspree.io/f/xkjgeprg";
 
   var form = document.getElementById("banner-form");
   var errorBox = document.getElementById("form-error");
@@ -472,9 +470,9 @@
     var formData = new FormData(form);
     var bannerType = formData.get("banner_type") || "";
     var name = formData.get("name") || "";
+    var email = formData.get("email") || "";
     formData.append("_subject", "New banner order: " + name + (bannerType ? " (" + bannerType + ")" : ""));
-    formData.append("_template", "table");
-    formData.append("_captcha", "false");
+    if (email) formData.append("_replyto", email); // lets you hit "Reply" on the email straight to the customer
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending…";
@@ -486,8 +484,11 @@
     })
       .then(function (res) {
         return res.json().catch(function () { return {}; }).then(function (body) {
-          if (!res.ok || body.success === "false" || body.success === false) {
-            throw new Error(body.message || ("The email service answered with HTTP " + res.status));
+          if (!res.ok || (body.errors && body.errors.length)) {
+            var msg = body.errors && body.errors.length
+              ? body.errors.map(function (e) { return e.message; }).join("; ")
+              : ("The email service answered with HTTP " + res.status);
+            throw new Error(msg);
           }
         });
       })
